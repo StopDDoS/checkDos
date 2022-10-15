@@ -1,0 +1,4 @@
+*.pcapng
+pcaps/*
+.env
+**/*.swp

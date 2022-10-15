@@ -1,0 +1,15 @@
+[Unit]
+Description=CheckDos Service
+After=fail2ban.service
+
+[Service]
+User=root
+WorkingDirectory=/srv/checkdos/checkdos
+LimitNOFILE=4096
+PIDFile=/var/run/checkdos.pid
+ExecStart=/usr/bin/python3 checkdos.py
+Restart=on-failure
+StartLimitInterval=600
+
+[Install]
+WantedBy=multi-user.target
