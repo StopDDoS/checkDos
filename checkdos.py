@@ -70,7 +70,7 @@ def record():
     filter = ""
     if config["FILTER_EXTERNAL_IP"] == "True":
         ip = get_network_ip_address()
-        filter = "'dst {} or src {}'".format(ip)
+        filter = "'dst {} or src {}'".format(ip, ip)
     # -Q in: only capture incoming traffic -Z root is required for writing pcap files, -i sets the interface name
     os.system("timeout {} tcpdump -Q in -Z root -i {} -w pcaps/ddos-{}.pcap {}".format(config["CAPTURE_DURATION"], interfaceName, now, filter)) #  and write to file
 
