@@ -5,8 +5,9 @@ import time
 import subprocess
 from datetime import datetime
 from dotenv import dotenv_values
-config = dotenv_values(".env")
 
+# Load the .env file
+config = dotenv_values(".env")
 
 
 # Gets the IPV4 address of the active network adapter.
@@ -69,7 +70,7 @@ def record():
     filter = ""
     if config["FILTER_EXTERNAL_IP"] == "True":
         ip = get_network_ip_address()
-        filter = "'dst " + ip + " or src " + ip + "'"
+        filter = "'dst {} or src {}'".format(ip)
     # -Q in: only capture incoming traffic -Z root is required for writing pcap files, -i sets the interface name
     os.system("timeout {} tcpdump -Q in -Z root -i {} -w pcaps/ddos-{}.pcap {}".format(config["CAPTURE_DURATION"], interfaceName, now, filter)) #  and write to file
 
